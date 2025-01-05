@@ -155,7 +155,6 @@ class RedBlackTree {
         let x, originalNode = nodeToDelete;
         let originalColor = originalNode.color;
     
-        // Case 1: NodeToDelete has only one child or no child
         if (nodeToDelete.left === this.NIL) {
             x = nodeToDelete.right;
             this.transplant(nodeToDelete, nodeToDelete.right);
@@ -165,8 +164,8 @@ class RedBlackTree {
             this.transplant(nodeToDelete, nodeToDelete.left);
         }
         else {
-            // Case 2: NodeToDelete has two children, find the largest node in left sub-tree
-            originalNode = this.getMaximum(nodeToDelete.left); // Change here: find maximum in left sub-tree
+            
+            originalNode = this.getMaximum(nodeToDelete.left); 
             originalColor = originalNode.color;
             x = originalNode.left;
     
@@ -196,20 +195,19 @@ class RedBlackTree {
             if (node === node.parent.left) {
                 sibling = node.parent.right;
                 
-                // Case 1: Rød sibling
+         
                 if (sibling.color === 'red') {
                     sibling.color = 'black';
                     node.parent.color = 'red';
                     this.rotateLeft(node.parent);
                     sibling = node.parent.right;
                 }
-                
-                // Case 2: Sorte children
+            
                 if (sibling.left.color === 'black' && sibling.right.color === 'black') {
                     sibling.color = 'red';
                     node = node.parent;
                 } else {
-                    // Case 3: Mindst ét rødt child
+                   
                     if (sibling.right.color === 'black') {
                         sibling.left.color = 'black';
                         sibling.color = 'red';
@@ -217,7 +215,7 @@ class RedBlackTree {
                         sibling = node.parent.right;
                     }
                     
-                    // Case 4: Højre child er rødt
+                 
                     sibling.color = node.parent.color;
                     node.parent.color = 'black';
                     sibling.right.color = 'black';
@@ -225,7 +223,7 @@ class RedBlackTree {
                     node = this.root;
                 }
             } else {
-                // Spejlvendt logik for højre side
+                
                 sibling = node.parent.left;
                 
                 if (sibling.color === 'red') {
@@ -285,7 +283,7 @@ class RedBlackTree {
     }
 }
 
-// Visualization functions
+
 function drawNode(value, x, y, color) {
     if (typeof value !== 'number' || typeof x !== 'number' || typeof y !== 'number') return;
     
